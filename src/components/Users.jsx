@@ -1,17 +1,28 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const Users = () => {
 
-    const users = useLoaderData();
-    
+    const loadedUsers = useLoaderData();
+    const [users , setUsers] = useState(loadedUsers);
+
     const handleDelete = (id)=>{
+
         fetch(`http://localhost:5000/users/${id}`,{
             method: "DELETE",
-
         })
         .then(res=> res.json())
-        .then(data=> console.log(data))
+        .then(data=> {
+            if (data.deletedCount === 1) {
+                alert("Successfully deleted");
+                const remaining = users.filter(usr => usr._id !== id);
+                setUsers(remaining);
+            }else {
+               alert("No documents Deleted ");
+            }
+        })
         .catch(er=> console.log(er.message))
+
     }
 
     return (
