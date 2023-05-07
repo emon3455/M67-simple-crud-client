@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import './App.css'
+import Header from './components/Header';
 
 function App() {
 
@@ -35,6 +36,8 @@ function App() {
 
   return (
     <>
+
+      <Header></Header>
      
       <h1>simple crud</h1>
       <form onSubmit={handleSubmit}>
